@@ -1,0 +1,43 @@
+---
+const skills = {
+  "Programming": ["C#.NET/.NET Core", "ASP.NET/.NET Core", "JavaScript"],
+  "Frameworks": [".NET Framework 4.0/4.5", ".NET Core", "Web API", "LINQ", "AngularJS", "Bootstrap", "jQuery"],
+  "Design Patterns": ["Factory", "Singleton", "Repository", "SOLID Principles"],
+  "Development Tools": [
+    "Visual Studio", "Postman", "Git Bash", "SourceTree", "Jira", 
+    "SQL Server Management Studio", "IntelliJ IDEA", "Azure Storage Explorer", 
+    "ServiceBus Explorer", "ReSharper", "Azure DevOps"
+  ],
+  "RDBMS": ["MSSQL", "MySQL", "Oracle"]
+};
+---
+
+<section id="skills" class="py-20 px-6 relative overflow-hidden">
+  <!-- Background decoration -->
+  <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-primary-100/30 dark:from-primary-900/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+  
+  <div class="container mx-auto max-w-6xl relative z-10">
+    <h2 class="text-4xl font-bold mb-12 text-center gradient-text">
+      Skills & Technologies
+    </h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {Object.entries(skills).map(([category, items]) => (
+        <div class="card card-interactive group p-6">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-1 h-8 bg-gradient-to-b from-primary-600 to-primary-400 rounded-full"></div>
+            <h3 class="text-xl font-semibold text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors">
+              {category}
+            </h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            {items.map(skill => (
+              <span class="badge badge-primary badge-tech-hover">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

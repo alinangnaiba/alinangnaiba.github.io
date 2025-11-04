@@ -1,0 +1,104 @@
+---
+const featuredProjects = [
+  {
+    name: "merMDitor",
+    description: "A modern, keyboard friendly, dark themed Markdown editor focused on a smooth writing + instant preview workflow with first class diagram and rich text support.An online Markdown editor with real-time preview and advanced features. Actively used by developers and writers for content creation.",
+    url: "https://www.mermditor.dev/",
+    type: "Web Application",
+    status: "Live",
+    technologies: ["Markdown", "Editor", "Web"],
+    icon: "markdown-logo",
+    iconWeight: "duotone",
+    metrics: "Active users based on editor page visits"
+  },
+  {
+    name: "Anino.Tool",
+    description: "Anino is a lightweight, fast mock API server that allows you to quickly spin up REST API endpoints from a simple JSON definition file. Perfect for frontend development, testing, and prototyping when you need a backend API that doesn't exist yet.",
+    url: "https://www.nuget.org/packages/Anino.Tool",
+    type: "NuGet Package",
+    status: "Published",
+    technologies: [".NET", "NuGet", "Developer Tools"],
+    icon: "package",
+    iconWeight: "duotone",
+    metrics: "Available on NuGet Gallery"
+  }
+];
+---
+
+<section id="featured-projects" class="py-20 px-6 bg-white dark:bg-dark-sidebar relative overflow-hidden">
+  <!-- Background decoration -->
+  <div class="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-primary-100/30 dark:from-primary-900/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+  
+  <div class="container mx-auto max-w-6xl relative z-10">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4 bg-gradient-to-r from-slate-900 via-primary-800 to-slate-900 dark:from-slate-100 dark:via-primary-400 dark:to-slate-100 bg-clip-text text-transparent">
+        Featured Projects
+      </h2>
+      <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+        Live applications and tools
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      {featuredProjects.map((project) => (
+        <a 
+          href={project.url} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="group block h-full"
+        >
+          <div class="card-featured card-featured-hover p-8 relative overflow-hidden h-full flex flex-col">
+            <!-- Gradient overlay on hover -->
+            <div class="absolute inset-0 bg-gradient-to-br from-primary-500/0 to-primary-600/0 group-hover:from-primary-500/5 group-hover:to-primary-600/5 transition-all duration-300 rounded-2xl"></div>
+            
+            <div class="relative z-10 flex flex-col h-full">
+              <!-- Icon and Status Badge -->
+              <div class="flex items-start justify-between mb-4">
+                <div class="text-primary-600 dark:text-primary-400 group-hover:scale-110 transition-transform duration-300">
+                  <i class={`ph-${project.iconWeight} ph-${project.icon} text-5xl`}></i>
+                </div>
+                <span class="badge badge-status-live text-xs flex items-center gap-1">
+                  <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                  {project.status}
+                </span>
+              </div>
+
+              <!-- Project Name -->
+              <h3 class="text-2xl font-bold mb-2 text-slate-900 dark:text-slate-100 group-hover:text-primary-700 dark:group-hover:text-primary-400 transition-colors">
+                {project.name}
+                <i class="ph ph-arrow-square-out inline-block text-xl ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+              </h3>
+
+              <!-- Type Badge -->
+              <div class="mb-3">
+                <span class="text-xs font-semibold text-primary-600 dark:text-primary-400 bg-primary-100 dark:bg-primary-900/30 px-2 py-1 rounded">
+                  {project.type}
+                </span>
+              </div>
+
+              <!-- Description -->
+              <p class="text-slate-700 dark:text-dark-text mb-4 leading-relaxed flex-grow">
+                {project.description}
+              </p>
+
+              <!-- Technologies -->
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.technologies.map((tech) => (
+                  <span class="badge badge-tech">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              <!-- Metrics -->
+              <div class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-dark-border pt-4 mt-auto">
+                <i class="ph-duotone ph-eye text-base"></i>
+                {project.metrics}
+              </div>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

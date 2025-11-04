@@ -1,0 +1,149 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: string;
+}
+
+const { 
+  title, 
+  description = "Alyn Amarillo - Software Developer with 10+ years of experience in .NET, C#, and web development. Building robust applications and tools.",
+  image = "/og-image.png",
+  canonicalURL = new URL(Astro.url.pathname, Astro.site).href
+} = Astro.props;
+
+const siteTitle = "Alyn Amarillo - Software Developer";
+const author = "Alyn Amarillo";
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content={author} />
+    <meta name="keywords" content="software developer, .NET developer, C# developer, web development, ASP.NET, JavaScript, full-stack developer, Alyn Amarillo, portfolio, Birmingham developer" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:site_name" content={siteTitle} />
+    <meta property="og:locale" content="en_GB" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.site)} />
+    
+    <!-- Additional Meta Tags -->
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="theme-color" content="#0088ff" />
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Alyn Amarillo",
+      "jobTitle": "Software Developer",
+      "description": description,
+      "url": canonicalURL,
+      "sameAs": [
+        "https://github.com/alinangnaiba",
+        "https://linkedin.com/in/alinangnaiba"
+      ],
+      "knowsAbout": [
+        "C#",
+        ".NET",
+        "ASP.NET",
+        "JavaScript",
+        "Web Development",
+        "Software Engineering"
+      ],
+      "workLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Birmingham",
+          "addressRegion": "West Midlands",
+          "addressCountry": "GB"
+        }
+      }
+    })} />
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script is:inline>
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      })();
+
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
+      window.localStorage.setItem('theme', theme);
+    </script>
+    
+    <style is:global>
+      @import "../styles/global.css";
+    </style>
+  </head>
+  <body class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-dark-bg dark:to-dark-sidebar text-slate-900 dark:text-dark-text transition-colors duration-300">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    font-weight: 400;
+  }
+</style>
