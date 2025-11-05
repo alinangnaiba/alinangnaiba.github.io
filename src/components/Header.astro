@@ -21,13 +21,24 @@ import ThemeToggle from './ThemeToggle.astro';
       
       <div class="flex md:hidden items-center gap-2">
         <ThemeToggle />
-        <button id="mobile-menu-button" class="p-2" aria-label="Toggle menu">
+        <button 
+          id="mobile-menu-button" 
+          class="p-2" 
+          aria-label="Toggle mobile menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
           <i class="ph ph-list text-2xl"></i>
         </button>
       </div>
     </div>
     
-    <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2">
+    <div 
+      id="mobile-menu" 
+      class="hidden md:hidden pt-4 pb-2"
+      role="navigation"
+      aria-label="Mobile navigation"
+    >
       <a href="#about" class="block py-2 nav-link">About</a>
       <a href="#experience" class="block py-2 nav-link">Experience</a>
       <a href="#skills" class="block py-2 nav-link">Skills</a>
@@ -43,13 +54,16 @@ import ThemeToggle from './ThemeToggle.astro';
   const mobileMenu = document.getElementById('mobile-menu');
   
   mobileMenuButton?.addEventListener('click', () => {
+    const isHidden = mobileMenu?.classList.contains('hidden');
     mobileMenu?.classList.toggle('hidden');
+    mobileMenuButton?.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
   });
   
   const mobileLinks = mobileMenu?.querySelectorAll('a');
   mobileLinks?.forEach(link => {
     link.addEventListener('click', () => {
       mobileMenu?.classList.add('hidden');
+      mobileMenuButton?.setAttribute('aria-expanded', 'false');
     });
   });
 </script>

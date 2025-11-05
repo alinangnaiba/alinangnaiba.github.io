@@ -1,6 +1,8 @@
 ---
 import GitHubIcon from './icons/GitHubIcon.astro';
 import LinkedInIcon from './icons/LinkedInIcon.astro';
+
+const formEndpoint = import.meta.env.PUBLIC_FORM_ENDPOINT;
 ---
 
 <section id="contact" class="py-20 px-6 bg-white dark:bg-dark-sidebar relative overflow-hidden">
@@ -25,7 +27,7 @@ import LinkedInIcon from './icons/LinkedInIcon.astro';
     <div class="grid md:grid-cols-2 gap-12 items-start">
       <!-- Contact Form -->
       <div class="card p-8">
-        <form id="contact-form" class="space-y-6">
+        <form id="contact-form" class="space-y-6" aria-label="Contact form">
           <div>
             <label for="name" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               Name <span class="text-red-500">*</span>
@@ -122,6 +124,7 @@ import LinkedInIcon from './icons/LinkedInIcon.astro';
               target="_blank" 
               rel="noopener noreferrer"
               class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-dark-highlight transition-colors group"
+              aria-label="Visit GitHub profile"
             >
               <div class="w-10 h-10 bg-slate-900 dark:bg-slate-700 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                 <GitHubIcon class="w-5 h-5 text-white" />
@@ -138,6 +141,7 @@ import LinkedInIcon from './icons/LinkedInIcon.astro';
               target="_blank" 
               rel="noopener noreferrer"
               class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-dark-highlight transition-colors group"
+              aria-label="Visit LinkedIn profile"
             >
               <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                 <LinkedInIcon class="w-5 h-5 text-white" />
@@ -186,16 +190,14 @@ import LinkedInIcon from './icons/LinkedInIcon.astro';
   </div>
 </section>
 
-<script>
-  // Google Apps Script Web App URL
-  // Follow GOOGLE_APPS_SCRIPT_SETUP.md to get your URL
-  const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzxFUAFSNoMaWg8qingJHAHh9i5SZMW7kBJnTcevPc6c7cJ7x3pDJziE5k-lPLtXdCJUQ/exec';
+<script define:vars={{ formEndpoint }}>
+  const FORM_ENDPOINT = formEndpoint;
   
-  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const form = document.getElementById('contact-form');
   const formStatus = document.getElementById('form-status');
   const successMessage = document.getElementById('success-message');
   const errorMessage = document.getElementById('error-message');
-  const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
+  const submitButton = form?.querySelector('button[type="submit"]');
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
