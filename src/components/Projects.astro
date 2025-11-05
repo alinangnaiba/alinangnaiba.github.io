@@ -1,53 +1,62 @@
 ---
+
 ---
 
-<section id="projects" class="py-20 px-6 relative overflow-hidden">
-  <!-- Background decoration -->
-  <div class="absolute top-20 right-0 w-96 h-96 bg-gradient-to-bl from-primary-100/30 dark:from-primary-900/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
-  
-  <div class="container mx-auto max-w-6xl relative z-10">
-    <h2 class="text-4xl font-bold mb-4 text-center bg-gradient-to-r from-slate-900 via-primary-800 to-slate-900 dark:from-slate-100 dark:via-primary-400 dark:to-slate-100 bg-clip-text text-transparent">
+<section id="projects" class="section">
+  <div
+    class="blob right-0 top-20 bg-gradient-to-bl from-primary-100/30 to-transparent dark:from-primary-900/10"
+  >
+  </div>
+
+  <div class="section-container">
+    <h2
+      class="mb-4 bg-gradient-to-r from-slate-900 via-primary-800 to-slate-900 bg-clip-text text-center text-4xl font-bold text-transparent dark:from-slate-100 dark:via-primary-400 dark:to-slate-100"
+    >
       GitHub Projects
     </h2>
-    <p class="text-center text-slate-600 dark:text-slate-400 mb-12 max-w-2xl mx-auto">
+    <p class="mx-auto mb-12 max-w-2xl text-center text-slate-600 dark:text-slate-400">
       Some side projects and some where I just play around out of curiousity.
     </p>
-    <div id="projects-loading" class="col-span-full text-center py-12">
-      <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+    <div id="projects-loading" class="col-span-full py-12 text-center">
+      <div class="inline-block h-12 w-12 animate-spin rounded-full border-b-2 border-primary-600">
+      </div>
       <p class="mt-4 text-slate-600 dark:text-slate-400">Loading projects...</p>
     </div>
-    
-    <div id="projects-error" class="hidden col-span-full text-center py-12">
-      <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 dark:bg-red-900/30 mb-4">
+
+    <div id="projects-error" class="col-span-full hidden py-12 text-center">
+      <div
+        class="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30"
+      >
         <i class="ph-duotone ph-warning text-3xl text-red-500 dark:text-red-400"></i>
       </div>
-      <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-2">Failed to Load Projects</h3>
-      <p class="text-slate-600 dark:text-slate-400 mb-4">Unable to fetch GitHub repositories. Please try again later.</p>
-      <button 
-        id="retry-button" 
-        class="btn btn-secondary"
-      >
+      <h3 class="mb-2 text-lg font-semibold text-slate-900 dark:text-slate-100">
+        Failed to Load Projects
+      </h3>
+      <p class="mb-4 text-slate-600 dark:text-slate-400">
+        Unable to fetch GitHub repositories. Please try again later.
+      </p>
+      <button id="retry-button" class="btn btn-secondary">
         <i class="ph-duotone ph-arrows-clockwise text-base"></i>
         Retry
       </button>
     </div>
-    
-    <div id="projects-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-    
+
+    <div id="projects-container" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
+
     <!-- Pagination Controls -->
-    <div id="pagination-container" class="hidden mt-8 flex items-center justify-center gap-2">
-      <button 
-        id="prev-page" 
-        class="btn btn-secondary disabled:opacity-30 disabled:cursor-not-allowed"
+    <div id="pagination-container" class="mt-8 flex hidden items-center justify-center gap-2">
+      <button
+        id="prev-page"
+        class="btn btn-secondary disabled:cursor-not-allowed disabled:opacity-30"
         disabled
       >
         <i class="ph ph-caret-left text-base"></i>
         Previous
       </button>
-      <div id="page-info" class="px-4 py-2 text-slate-700 dark:text-dark-text font-medium"></div>
-      <button 
-        id="next-page" 
-        class="btn btn-secondary disabled:opacity-30 disabled:cursor-not-allowed"
+      <div id="page-info" class="px-4 py-2 font-medium text-slate-700 dark:text-dark-text"></div>
+      <button
+        id="next-page"
+        class="btn btn-secondary disabled:cursor-not-allowed disabled:opacity-30"
       >
         Next
         <i class="ph ph-caret-right text-base"></i>
@@ -57,82 +66,98 @@
 </section>
 
 <script>
-  import type { GitHubRepo } from '../data/types';
+  import type { GitHubRepo } from "../data/types";
 
   let allRepos: GitHubRepo[] = [];
   let currentPage = 1;
   const reposPerPage = 6;
 
   async function fetchGitHubRepos() {
-    const loadingEl = document.getElementById('projects-loading');
-    const errorEl = document.getElementById('projects-error');
-    const container = document.getElementById('projects-container');
-    
+    const loadingEl = document.getElementById("projects-loading");
+    const errorEl = document.getElementById("projects-error");
+    const container = document.getElementById("projects-container");
+
     if (!container || !loadingEl || !errorEl) return;
-    
+
     try {
-      loadingEl.classList.remove('hidden');
-      errorEl.classList.add('hidden');
-      
-      const response = await fetch('https://api.github.com/users/alinangnaiba/repos?sort=updated&per_page=100');
-      
+      loadingEl.classList.remove("hidden");
+      errorEl.classList.add("hidden");
+
+      const response = await fetch(
+        "https://api.github.com/users/alinangnaiba/repos?sort=updated&per_page=100"
+      );
+
       if (!response.ok) {
         throw new Error(`GitHub API returned ${response.status}`);
       }
-      
+
       const repos: GitHubRepo[] = await response.json();
-      
+
       if (!Array.isArray(repos) || repos.length === 0) {
-        throw new Error('No repositories found');
+        throw new Error("No repositories found");
       }
-      
-      allRepos = repos.filter(repo => !repo.fork);
-      loadingEl.classList.add('hidden');
-      
+
+      allRepos = repos.filter((repo) => !repo.fork);
+      loadingEl.classList.add("hidden");
+
       if (allRepos.length > reposPerPage) {
-        const paginationContainer = document.getElementById('pagination-container');
+        const paginationContainer = document.getElementById("pagination-container");
         if (paginationContainer) {
-          paginationContainer.classList.remove('hidden');
+          paginationContainer.classList.remove("hidden");
         }
       }
-      
+
       displayRepos();
     } catch (error) {
-      console.error('Error fetching GitHub repos:', error);
-      loadingEl.classList.add('hidden');
-      errorEl.classList.remove('hidden');
+      console.error("Error fetching GitHub repos:", error);
+      loadingEl.classList.add("hidden");
+      errorEl.classList.remove("hidden");
     }
   }
 
   function displayRepos() {
-    const container = document.getElementById('projects-container');
+    const container = document.getElementById("projects-container");
     if (!container) return;
 
     const startIndex = (currentPage - 1) * reposPerPage;
     const endIndex = startIndex + reposPerPage;
     const reposToDisplay = allRepos.slice(startIndex, endIndex);
-    
+
     container.innerHTML = reposToDisplay
-      .map(repo => `
+      .map(
+        (repo) => `
         <div class="card card-interactive group p-6 flex flex-col">
           <div class="flex-grow">
             <h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-slate-100">
               ${repo.name}
             </h3>
             <p class="text-slate-600 dark:text-slate-400 mb-4 line-clamp-2">
-              ${repo.description || 'No description available'}
+              ${repo.description || "No description available"}
             </p>
             <div class="flex flex-wrap gap-2 mb-4">
-              ${repo.language ? `
+              ${
+                repo.language
+                  ? `
                 <span class="badge badge-primary">
                   ${repo.language}
                 </span>
-              ` : ''}
-              ${repo.topics ? repo.topics.slice(0, 3).map((topic: string) => `
+              `
+                  : ""
+              }
+              ${
+                repo.topics
+                  ? repo.topics
+                      .slice(0, 3)
+                      .map(
+                        (topic: string) => `
                 <span class="badge badge-tech">
                   ${topic}
                 </span>
-              `).join('') : ''}
+              `
+                      )
+                      .join("")
+                  : ""
+              }
             </div>
           </div>
           <div class="flex items-center justify-between text-sm text-slate-600 dark:text-slate-400 pt-4 border-t border-slate-200 dark:border-dark-border">
@@ -157,25 +182,27 @@
             </a>
           </div>
         </div>
-      `).join('');
-    
+      `
+      )
+      .join("");
+
     updatePaginationControls();
   }
 
   function updatePaginationControls() {
     const totalPages = Math.ceil(allRepos.length / reposPerPage);
-    const prevButton = document.getElementById('prev-page') as HTMLButtonElement;
-    const nextButton = document.getElementById('next-page') as HTMLButtonElement;
-    const pageInfo = document.getElementById('page-info');
-    
+    const prevButton = document.getElementById("prev-page") as HTMLButtonElement;
+    const nextButton = document.getElementById("next-page") as HTMLButtonElement;
+    const pageInfo = document.getElementById("page-info");
+
     if (prevButton) {
       prevButton.disabled = currentPage === 1;
     }
-    
+
     if (nextButton) {
       nextButton.disabled = currentPage === totalPages;
     }
-    
+
     if (pageInfo) {
       pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
     }
@@ -185,7 +212,7 @@
     if (currentPage > 1) {
       currentPage--;
       displayRepos();
-      document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById("projects")?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }
 
@@ -194,13 +221,13 @@
     if (currentPage < totalPages) {
       currentPage++;
       displayRepos();
-      document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById("projects")?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }
 
-  document.getElementById('prev-page')?.addEventListener('click', goToPreviousPage);
-  document.getElementById('next-page')?.addEventListener('click', goToNextPage);
-  document.getElementById('retry-button')?.addEventListener('click', fetchGitHubRepos);
-  
+  document.getElementById("prev-page")?.addEventListener("click", goToPreviousPage);
+  document.getElementById("next-page")?.addEventListener("click", goToNextPage);
+  document.getElementById("retry-button")?.addEventListener("click", fetchGitHubRepos);
+
   fetchGitHubRepos();
 </script>

@@ -1,15 +1,20 @@
 ---
-import ThemeToggle from './ThemeToggle.astro';
+import ThemeToggle from "./ThemeToggle.astro";
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-dark-sidebar/95 backdrop-blur-md shadow-sm border-b border-transparent dark:border-dark-border">
+<header
+  class="fixed left-0 right-0 top-0 z-50 border-b border-transparent bg-white/90 shadow-sm backdrop-blur-md dark:border-dark-border dark:bg-dark-sidebar/95"
+>
   <nav class="container mx-auto px-6 py-4">
     <div class="flex items-center justify-between">
-      <a href="/" class="text-2xl font-bold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">
+      <a
+        href="/"
+        class="bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-2xl font-bold text-transparent"
+      >
         Alyn Amarillo
       </a>
-      
-      <div class="hidden md:flex items-center gap-8">
+
+      <div class="hidden items-center gap-8 md:flex">
         <a href="#about" class="nav-link">About</a>
         <a href="#experience" class="nav-link">Experience</a>
         <a href="#skills" class="nav-link">Skills</a>
@@ -18,12 +23,12 @@ import ThemeToggle from './ThemeToggle.astro';
         <a href="#contact" class="nav-link">Contact</a>
         <ThemeToggle />
       </div>
-      
-      <div class="flex md:hidden items-center gap-2">
+
+      <div class="flex items-center gap-2 md:hidden">
         <ThemeToggle />
-        <button 
-          id="mobile-menu-button" 
-          class="p-2" 
+        <button
+          id="mobile-menu-button"
+          class="p-2"
           aria-label="Toggle mobile menu"
           aria-expanded="false"
           aria-controls="mobile-menu"
@@ -32,38 +37,38 @@ import ThemeToggle from './ThemeToggle.astro';
         </button>
       </div>
     </div>
-    
-    <div 
-      id="mobile-menu" 
-      class="hidden md:hidden pt-4 pb-2"
+
+    <div
+      id="mobile-menu"
+      class="hidden pb-2 pt-4 md:hidden"
       role="navigation"
       aria-label="Mobile navigation"
     >
-      <a href="#about" class="block py-2 nav-link">About</a>
-      <a href="#experience" class="block py-2 nav-link">Experience</a>
-      <a href="#skills" class="block py-2 nav-link">Skills</a>
-      <a href="#featured-projects" class="block py-2 nav-link">Featured</a>
-      <a href="#projects" class="block py-2 nav-link">Projects</a>
-      <a href="#contact" class="block py-2 nav-link">Contact</a>
+      <a href="#about" class="nav-link block py-2">About</a>
+      <a href="#experience" class="nav-link block py-2">Experience</a>
+      <a href="#skills" class="nav-link block py-2">Skills</a>
+      <a href="#featured-projects" class="nav-link block py-2">Featured</a>
+      <a href="#projects" class="nav-link block py-2">Projects</a>
+      <a href="#contact" class="nav-link block py-2">Contact</a>
     </div>
   </nav>
 </header>
 
 <script>
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  
-  mobileMenuButton?.addEventListener('click', () => {
-    const isHidden = mobileMenu?.classList.contains('hidden');
-    mobileMenu?.classList.toggle('hidden');
-    mobileMenuButton?.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  mobileMenuButton?.addEventListener("click", () => {
+    const isHidden = mobileMenu?.classList.contains("hidden");
+    mobileMenu?.classList.toggle("hidden");
+    mobileMenuButton?.setAttribute("aria-expanded", isHidden ? "true" : "false");
   });
-  
-  const mobileLinks = mobileMenu?.querySelectorAll('a');
-  mobileLinks?.forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu?.classList.add('hidden');
-      mobileMenuButton?.setAttribute('aria-expanded', 'false');
+
+  const mobileLinks = mobileMenu?.querySelectorAll("a");
+  mobileLinks?.forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileMenu?.classList.add("hidden");
+      mobileMenuButton?.setAttribute("aria-expanded", "false");
     });
   });
 </script>

@@ -1,47 +1,69 @@
 ---
+
 ---
 
-<section id="hero" class="min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden">
+<section
+  id="hero"
+  class="relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-20"
+>
   <!-- Animated background elements -->
-  <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <div class="absolute top-20 left-10 w-72 h-72 bg-primary-400/20 rounded-full blur-3xl animate-float"></div>
-    <div class="absolute bottom-20 right-10 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl animate-float animate-delay-2s"></div>
-    <div class="absolute top-1/2 left-1/2 w-80 h-80 bg-primary-500/10 rounded-full blur-3xl animate-float animate-delay-4s"></div>
+  <div class="pointer-events-none absolute inset-0 overflow-hidden">
+    <div
+      class="absolute left-10 top-20 h-72 w-72 animate-float rounded-full bg-primary-400/20 blur-3xl"
+    >
+    </div>
+    <div
+      class="animate-delay-2s absolute bottom-20 right-10 h-96 w-96 animate-float rounded-full bg-primary-600/20 blur-3xl"
+    >
+    </div>
+    <div
+      class="animate-delay-4s absolute left-1/2 top-1/2 h-80 w-80 animate-float rounded-full bg-primary-500/10 blur-3xl"
+    >
+    </div>
   </div>
 
-  <div class="container mx-auto max-w-4xl text-center relative z-10">
+  <div class="container relative z-10 mx-auto max-w-4xl text-center">
     <div class="animate-fade-in">
       <div class="mb-6 inline-block">
-        <span class="badge badge-primary animate-slide-up flex items-center gap-2">
+        <span class="badge badge-primary flex animate-slide-up items-center gap-2">
           <i class="ph-fill ph-hand-waving text-lg text-yellow-500"></i>
           Hi, I'm Alyn
         </span>
       </div>
-      
-      <h1 class="text-5xl md:text-7xl font-bold mb-6 gradient-text-primary animate-slide-up animate-delay-100">
+
+      <h1
+        class="gradient-text-primary animate-delay-100 mb-6 animate-slide-up text-5xl font-bold md:text-7xl"
+      >
         Software Developer
       </h1>
 
-      <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto animate-slide-up animate-delay-250">
-        Building robust web applications with <span class="font-semibold text-primary-600 dark:text-primary-400">.NET</span>, 
-        <span class="font-semibold text-primary-600 dark:text-primary-400">C#</span>, and 
+      <p
+        class="animate-delay-250 mx-auto mb-8 max-w-2xl animate-slide-up text-lg text-slate-600 dark:text-slate-400 md:text-xl"
+      >
+        Building robust web applications with <span
+          class="font-semibold text-primary-600 dark:text-primary-400">.NET</span
+        >,
+        <span class="font-semibold text-primary-600 dark:text-primary-400">C#</span>, and
         <span class="font-semibold text-primary-600 dark:text-primary-400">JavaScript</span>
       </p>
-      
-      <div class="flex gap-4 justify-center flex-wrap animate-slide-up animate-delay-300">
-        <a href="#featured-projects" class="group btn btn-primary">
-            <i class="ph-fill ph-briefcase"></i>
-            View Featured Work
+
+      <div class="animate-delay-300 flex animate-slide-up flex-wrap justify-center gap-4">
+        <a href="#featured-projects" class="btn btn-primary group">
+          <i class="ph-fill ph-briefcase"></i>
+          View Featured Work
         </a>
         <a href="#contact" class="btn btn-outline">
-            <i class="ph-fill ph-hand-tap"></i>
-            Get in Touch
+          <i class="ph-fill ph-hand-tap"></i>
+          Get in Touch
         </a>
       </div>
-      
+
       <!-- Scroll indicator -->
       <div class="mt-16 animate-bounce">
-        <a href="#about" class="inline-block text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+        <a
+          href="#about"
+          class="inline-block text-slate-400 transition-colors hover:text-primary-600 dark:hover:text-primary-400"
+        >
           <i class="ph ph-arrow-down text-2xl"></i>
         </a>
       </div>

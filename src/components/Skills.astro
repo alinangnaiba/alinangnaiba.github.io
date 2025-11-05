@@ -1,33 +1,33 @@
 ---
-import { skills } from '../data/skills';
+import { skills } from "../data/skills";
 ---
 
-<section id="skills" class="py-20 px-6 relative overflow-hidden">
-  <!-- Background decoration -->
-  <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-primary-100/30 dark:from-primary-900/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
-  
-  <div class="container mx-auto max-w-6xl relative z-10">
-    <h2 class="text-4xl font-bold mb-12 text-center gradient-text">
-      Skills & Technologies
-    </h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {Object.entries(skills).map(([category, items]) => (
-        <div class="card card-interactive group p-6">
-          <div class="flex items-center gap-2 mb-4">
-            <div class="w-1 h-8 bg-gradient-to-b from-primary-600 to-primary-400 rounded-full"></div>
-            <h3 class="text-xl font-semibold text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors">
-              {category}
-            </h3>
+<section id="skills" class="section">
+  <div
+    class="blob bottom-0 left-0 bg-gradient-to-tr from-primary-100/30 to-transparent dark:from-primary-900/10"
+  >
+  </div>
+
+  <div class="section-container">
+    <h2 class="heading-section">Skills & Technologies</h2>
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {
+        Object.entries(skills).map(([category, items]) => (
+          <div class="card card-interactive group p-6">
+            <div class="mb-4 flex items-center gap-2">
+              <div class="h-8 w-1 rounded-full bg-gradient-to-b from-primary-600 to-primary-400" />
+              <h3 class="text-xl font-semibold text-primary-600 transition-colors group-hover:text-primary-700 dark:text-primary-400 dark:group-hover:text-primary-300">
+                {category}
+              </h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              {items.map((skill) => (
+                <span class="badge badge-primary badge-tech-hover">{skill}</span>
+              ))}
+            </div>
           </div>
-          <div class="flex flex-wrap gap-2">
-            {items.map(skill => (
-              <span class="badge badge-primary badge-tech-hover">
-                {skill}
-              </span>
-            ))}
-          </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 </section>
